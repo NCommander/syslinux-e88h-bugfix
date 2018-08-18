@@ -19,6 +19,11 @@ OUTPUT_FORMAT("elf64-x86-64", "elf64-x86-64", "elf64-x86-64")
 OUTPUT_ARCH(i386:x86-64)
 ENTRY(_start)
 
+PHDRS
+{
+	all PT_LOAD ;
+}
+
 SECTIONS
 {
 	. = 0;
@@ -31,7 +36,7 @@ SECTIONS
 		*(.text)
 		*(.text.*)
 		__text_end = .;
-	}
+	} :all
 
 	. = ALIGN(16);
 
@@ -40,7 +45,7 @@ SECTIONS
 		*(.rodata)
 		*(.rodata.*)
 		__rodata_end = .;
-	}
+	} :all
 
 	. = ALIGN(4);
 
@@ -49,14 +54,14 @@ SECTIONS
 		KEEP (*(SORT(.ctors.*)))
 		KEEP (*(.ctors))
 		__ctors_end = .;
-	}
+	} :all
 
 	.dtors : {
 		__dtors_start = .;
 		KEEP (*(SORT(.dtors.*)))
 		KEEP (*(.dtors))
 		__dtors_end = .;
-	}
+	} :all
 
 	. = ALIGN(4096);
 	.rel : {
@@ -64,7 +69,7 @@ SECTIONS
 		*(.rel.data)
 		*(.rel.data.*)
 		*(.rel.ctors)
-	}
+	} :all
 
 	. = ALIGN(4);
 
@@ -72,14 +77,14 @@ SECTIONS
 		__gnu_hash_start = .;
 		*(.gnu.hash)
 		__gnu_hash_end = .;
-	}
+	} :all
 
 
 	.dynsym : {
 		__dynsym_start = .;
 		*(.dynsym)
 		__dynsym_end = .;
-	}
+	} :all
 
 	. = ALIGN(4);
 
@@ -87,7 +92,7 @@ SECTIONS
 		__dynstr_start = .;
 		*(.dynstr)
 		__dynstr_end = .;
-	}
+	} :all
 
 	. = ALIGN(4);
 
@@ -104,7 +109,7 @@ SECTIONS
 		KEEP (*(.got.plt))
 		KEEP (*(.got))
 		__got_end = .;
-	}
+	} :all
 
 	. = ALIGN(4);
 
@@ -112,7 +117,7 @@ SECTIONS
 		__dynamic_start = .;
 		*(.dynamic)
 		__dynamic_end = .;
-	}
+	} :all
 
 	. = ALIGN(16);
 
@@ -122,19 +127,19 @@ SECTIONS
 		*(.data.*)
 		*(.lowmem)
 		__data_end = .;
-	}
+	} :all
 
 	.reloc : {
 		*(.reloc)
-	}
+	} :all
 
 	.symtab : {
 		*(.symtab)
-	}
+	} :all
 
 	.strtab : {
 		*(.strtab)
-	}
+	} :all
 
 	.bss (NOLOAD) : {
 		/* the EFI loader doesn't seem to like a .bss section,
@@ -148,7 +153,7 @@ SECTIONS
 		__bss_end = .;
 		*(.sbss)
 		*(.scommon)
-	}
+	} :all
 	__bss_len = ABSOLUTE(__bss_end) - ABSOLUTE(__bss_start);
 	__bss_dwords = (__bss_len + 3) >> 2;
 
@@ -161,7 +166,7 @@ SECTIONS
 		*(.hugebss)
 		*(.hugebss.*)
 		__hugebss_end = .;
-	}
+	} :all
 
 	_end = .;
 
