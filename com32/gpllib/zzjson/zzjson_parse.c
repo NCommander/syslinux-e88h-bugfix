@@ -138,6 +138,10 @@ static ZZJSON *parse_string2(ZZJSON_CONFIG *config) {
     return zzjson;
 }
 
+static double __attribute__((optimize("O0"))) pow_noopt(double x, double y) {
+	return pow(x, y);
+}
+
 static ZZJSON *parse_number(ZZJSON_CONFIG *config) {
     ZZJSON *zzjson;
     unsigned long long ival = 0, expo = 0;
@@ -213,7 +217,7 @@ skipexpo:
     if (dbl) {
         dval = sign * (long long) ival;
         dval += sign * frac;
-        dval *= pow(10.0, (double) signexpo * expo);
+        dval *= pow_noopt(10.0, (double) signexpo * expo);
     }
 
     zzjson = config->calloc(1, sizeof(ZZJSON));
