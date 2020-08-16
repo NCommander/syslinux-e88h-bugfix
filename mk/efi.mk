@@ -25,6 +25,7 @@ FORMAT=efi-app-$(EFI_SUBARCH)
 
 CFLAGS = -I$(EFIINC) -I$(EFIINC)/$(EFI_SUBARCH) \
 		-DEFI_FUNCTION_WRAPPER -fPIC -fshort-wchar -ffreestanding \
+		-fcommon \
 		-Wall -I$(com32)/include -I$(com32)/include/sys \
 		-I$(core)/include -I$(core)/ $(ARCHOPT) \
 		-I$(com32)/lib/ -I$(com32)/libutil/include -std=gnu99 \

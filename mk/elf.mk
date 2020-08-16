@@ -55,6 +55,7 @@ GPLINCLUDE =
 endif
 
 CFLAGS     = $(GCCOPT) $(GCCWARN) -W -Wall \
+	     -fcommon \
 	     -fomit-frame-pointer -D__COM32__ -D__FIRMWARE_$(FIRMWARE)__ -DDYNAMIC_MODULE \
 	     -nostdinc -iwithprefix include \
 	     -I$(com32)/libutil/include -I$(com32)/include \

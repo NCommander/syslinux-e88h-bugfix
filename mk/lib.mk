@@ -49,7 +49,7 @@ OPTFLAGS  = -Os -march=$(MARCH) -falign-functions=0 -falign-jumps=0 \
 	    -falign-labels=0 -ffast-math -fomit-frame-pointer
 WARNFLAGS = $(GCCWARN) -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Winline
 
-CFLAGS  = $(OPTFLAGS) $(REQFLAGS) $(WARNFLAGS) $(LIBFLAGS)
+CFLAGS  = $(OPTFLAGS) $(REQFLAGS) -fcommon $(WARNFLAGS) $(LIBFLAGS)
 
 ifeq ($(FWCLASS),EFI)
 CFLAGS += -mno-red-zone

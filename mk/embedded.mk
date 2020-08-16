@@ -57,7 +57,7 @@ LIBGCC    := $(shell $(CC) $(GCCOPT) --print-libgcc)
 LD        += -m elf_$(ARCH)
 
 # Note: use += for CFLAGS and SFLAGS in case something is set in MCONFIG.local
-CFLAGS    += $(GCCOPT) -g $(GCCWARN) -Wno-sign-compare $(OPTFLAGS) $(INCLUDES)
+CFLAGS    += $(GCCOPT) -g $(GCCWARN) -Wno-sign-compare -fcommon $(OPTFLAGS) $(INCLUDES)
 SFLAGS    += $(CFLAGS) -D__ASSEMBLY__
 
 .SUFFIXES: .c .o .S .s .i .elf .com .bin .asm .lst .c32 .lss
